@@ -4,7 +4,11 @@
   "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
   "license": "MIT",
   "dependencies": {
+<<<<<<< 3db7ffdfbbe11e96dcb330297a871e54f42283f8
     "microbit-dal": "calliope-mini/microbit-dal#v2.0.0-calliope-1.0.5"
+=======
+    "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc7-calliope-1.0.1-or"
+>>>>>>> bump to latest 2017 version
   },
   "extraIncludes": [
     "inc"
