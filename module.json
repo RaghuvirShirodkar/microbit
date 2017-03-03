@@ -1,5 +1,6 @@
 {
   "name": "microbit",
+<<<<<<< f9a60f55c0a4ad4b838cdd45ce807df523540948
   "version": "2.0.0-calliope-1.0.5",
   "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
   "license": "MIT",
@@ -9,6 +10,13 @@
 =======
     "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc7-calliope-1.0.1-or"
 >>>>>>> bump to latest 2017 version
+=======
+  "version": "2.0.0-rc7-calliope-1.0.1-or1",
+  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
+  "license": "MIT",
+  "dependencies": {
+    "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc7-calliope-1.0.1-or1"
+>>>>>>> bump version
   },
   "extraIncludes": [
     "inc"
