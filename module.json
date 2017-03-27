@@ -1,5 +1,6 @@
 {
   "name": "microbit",
+<<<<<<< 512db4bc42a12e277872742a6f2a445b762ba986
 <<<<<<< aa51278f3b71542aea839fdef9409fe37cc417e2
 <<<<<<< f9a60f55c0a4ad4b838cdd45ce807df523540948
   "version": "2.0.0-calliope-1.0.5",
@@ -25,6 +26,13 @@
   "dependencies": {
   "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or"
 >>>>>>> #433 bump version for adding find element in array
+=======
+  "version": "2.0.0-rc8-calliope-1.0.2-or1",
+  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
+  "license": "MIT",
+  "dependencies": {
+  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or1"
+>>>>>>> bump version for supporting shift and invert of a function
   },
   "extraIncludes": [
     "inc"
