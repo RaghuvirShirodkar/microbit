@@ -42,6 +42,7 @@ DEALINGS IN THE SOFTWARE.
 #include "ManagedType.h"
 #include "ManagedString.h"
 #include "MicroBitImage.h"
+#include "MicroBitColor.h"
 #include "MicroBitFont.h"
 #include "MicroBitEvent.h"
 #include "DynamicPwm.h"
@@ -71,6 +72,7 @@ DEALINGS IN THE SOFTWARE.
 
 #include "CalliopeRGB.h"
 #include "CalliopeSoundMotor.h"
+
 // MicroBit::flags values
 #define MICROBIT_INITIALIZED                    0x01
 
@@ -135,7 +137,7 @@ class MicroBit
 	//Calliope MINI specific devices
 	CalliopeRGB 				rgb;
 	CalliopeSoundMotor 			soundmotor;
-	
+
     /**
       * Constructor.
       *
