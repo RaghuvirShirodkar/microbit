@@ -39,8 +39,12 @@
   "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
   "license": "MIT",
   "dependencies": {
+<<<<<<< 45076518d637944e0a6d7c1741755c0afb480480
   "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or2"
 >>>>>>> bump version for added MicroBitColor type
+=======
+  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or3"
+>>>>>>> bump version for fixed compass sensor
   },
   "extraIncludes": [
     "inc"
