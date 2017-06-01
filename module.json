@@ -1,5 +1,6 @@
 {
   "name": "microbit",
+<<<<<<< b5aaa8bf57b9e05fe2cdf0730d31ce978db34629
 <<<<<<< 0f028f3c16d3dfbdfcf26a5a7d4c9dff5d9a8593
 <<<<<<< 512db4bc42a12e277872742a6f2a445b762ba986
 <<<<<<< aa51278f3b71542aea839fdef9409fe37cc417e2
@@ -45,6 +46,13 @@
 =======
   "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or3"
 >>>>>>> bump version for fixed compass sensor
+=======
+  "version": "2.0.0-rc8-calliope-1.0.2-or4",
+  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
+  "license": "MIT",
+  "dependencies": {
+  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or4"
+>>>>>>> bump version for supporting Managed String comparation
   },
   "extraIncludes": [
     "inc"
