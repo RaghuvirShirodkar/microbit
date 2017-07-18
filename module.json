@@ -1,5 +1,6 @@
 {
   "name": "microbit",
+<<<<<<< d6b88b7f40131dfa3515f4db68afee8391d1a7d5
 <<<<<<< b1743c4c9064f2804e1468889d81fea79f98ff73
 <<<<<<< b7a04c7ef8339daa598986791df9d5a3bc0d4be0
 <<<<<<< 820857571790fb17a6494e01b56055ba2bd753c3
@@ -72,6 +73,9 @@
 >>>>>>> #536 535 bump microbit version
 =======
   "version": "2.0.0-rc8-calliope-1.0.2-or7",
+=======
+  "version": "2.0.0-rc8-calliope-1.0.2-or8",
+>>>>>>> bump version
   "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
   "license": "MIT",
   "dependencies": {
