@@ -1,98 +1,10 @@
 {
   "name": "microbit",
-<<<<<<< dc0500ddcbb823535b61396628a039d7dccdb917
-<<<<<<< d6b88b7f40131dfa3515f4db68afee8391d1a7d5
-<<<<<<< b1743c4c9064f2804e1468889d81fea79f98ff73
-<<<<<<< b7a04c7ef8339daa598986791df9d5a3bc0d4be0
-<<<<<<< 820857571790fb17a6494e01b56055ba2bd753c3
-<<<<<<< b5aaa8bf57b9e05fe2cdf0730d31ce978db34629
-<<<<<<< 0f028f3c16d3dfbdfcf26a5a7d4c9dff5d9a8593
-<<<<<<< 512db4bc42a12e277872742a6f2a445b762ba986
-<<<<<<< aa51278f3b71542aea839fdef9409fe37cc417e2
-<<<<<<< f9a60f55c0a4ad4b838cdd45ce807df523540948
-  "version": "2.0.0-calliope-1.0.5",
+  "version": "2.0.0-calliope-1.0.5-or1",
   "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
   "license": "MIT",
   "dependencies": {
-<<<<<<< 3db7ffdfbbe11e96dcb330297a871e54f42283f8
-    "microbit-dal": "calliope-mini/microbit-dal#v2.0.0-calliope-1.0.5"
-=======
-    "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc7-calliope-1.0.1-or"
->>>>>>> bump to latest 2017 version
-=======
-  "version": "2.0.0-rc7-calliope-1.0.1-or1",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-    "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc7-calliope-1.0.1-or1"
->>>>>>> bump version
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or"
->>>>>>> #433 bump version for adding find element in array
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or1",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or1"
->>>>>>> bump version for supporting shift and invert of a function
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or2",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-<<<<<<< 45076518d637944e0a6d7c1741755c0afb480480
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or2"
->>>>>>> bump version for added MicroBitColor type
-=======
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or3"
->>>>>>> bump version for fixed compass sensor
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or4",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or4"
->>>>>>> bump version for supporting Managed String comparation
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or5",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or5"
->>>>>>> #542 bump version of micrbit-dal
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or6",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or6"
->>>>>>> #536 535 bump microbit version
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or7",
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or8",
->>>>>>> bump version
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-<<<<<<< 0accddb980802bcf1d499dce35ac3476fbd60138
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or7"
->>>>>>> bump microbit version
-=======
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or8"
->>>>>>> bump version
-=======
-  "version": "2.0.0-rc8-calliope-1.0.2-or10",
-  "description": "A simple to use collection of the most commonly used components in the micro:bit runtime",
-  "license": "MIT",
-  "dependencies": {
-  "microbit-dal": "OpenRoberta/microbit-dal#v2.0.0-rc8-calliope-1.0.2-or9"
->>>>>>> OpenRoberta/roberatlab#803 add isPrime and isWhole functions
+    "microbit-dal": "OpenRoberta/microbit-dal#2.0.0-calliope-1.0.5-or1"
   },
   "extraIncludes": [
     "inc"
