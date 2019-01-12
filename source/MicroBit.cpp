@@ -65,7 +65,9 @@ RawSerial* SERIAL_DEBUG = NULL;
   */
 MicroBit::MicroBit() :
     serial(USBTX, USBRX),
+#ifndef TARGET_NRF51_CALLIOPE
 	resetButton(MICROBIT_PIN_BUTTON_RESET),
+#endif
     storage(),
     i2c(I2C_SDA0, I2C_SCL0),
     messageBus(),
@@ -98,9 +100,12 @@ MicroBit::MicroBit() :
     // Clear our status
     status = 0;
 
+// there is no soft reset pin available on the Callipo mini, it is resetted via the KL26z SWD
+#ifndef TARGET_NRF51_CALLIOPE
     // Bring up soft reset functionality as soon as possible.
     resetButton.mode(PullUp);
     resetButton.fall(this, &MicroBit::reset);
+#endif
 }
 
 /**
