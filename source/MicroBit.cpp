@@ -21,8 +21,14 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+
+====================
+Modifications Copyright (c) 2016 Calliope GbR
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
+und Björn Eberhardt GbR by arrangement with Calliope GbR.
 */
 
+#include <pinmap.h>
 #include "MicroBitConfig.h"
 /*
  * The underlying Nordic libraries that support BLE do not compile cleanly with the stringent GCC settings we employ
@@ -68,9 +74,9 @@ MicroBit::MicroBit() :
     buttonA(MICROBIT_PIN_BUTTON_A, MICROBIT_ID_BUTTON_A),
     buttonB(MICROBIT_PIN_BUTTON_B, MICROBIT_ID_BUTTON_B),
     buttonAB(MICROBIT_ID_BUTTON_A,MICROBIT_ID_BUTTON_B, MICROBIT_ID_BUTTON_AB),
-    accelerometer(MicroBitAccelerometer::autoDetect(i2c)),
-    compass(MicroBitCompass::autoDetect(i2c)),
-    compassCalibrator(compass, accelerometer, display, storage),
+    accelerometer(i2c),
+    compass(i2c, accelerometer, storage),
+    compassCalibrator(compass, accelerometer, display),
     thermometer(storage),
     io(MICROBIT_ID_IO_P0,MICROBIT_ID_IO_P1,MICROBIT_ID_IO_P2,
        MICROBIT_ID_IO_P3,MICROBIT_ID_IO_P4,MICROBIT_ID_IO_P5,
@@ -78,10 +84,17 @@ MicroBit::MicroBit() :
        MICROBIT_ID_IO_P9,MICROBIT_ID_IO_P10,MICROBIT_ID_IO_P11,
        MICROBIT_ID_IO_P12,MICROBIT_ID_IO_P13,MICROBIT_ID_IO_P14,
        MICROBIT_ID_IO_P15,MICROBIT_ID_IO_P16,MICROBIT_ID_IO_P19,
-       MICROBIT_ID_IO_P20),
+       MICROBIT_ID_IO_P20
+#ifdef TARGET_NRF51_CALLIOPE
+       ,
+       MICROBIT_ID_IO_P21
+#endif
+    ),
     bleManager(storage),
     radio(),
-    ble(NULL)
+    ble(NULL),
+    rgb(),
+    soundmotor()
 {
     // Clear our status
     status = 0;
@@ -111,6 +124,14 @@ void MicroBit::init()
     if (status & MICROBIT_INITIALIZED)
         return;
 
+    // configure the accelerometer
+    accelerometer.configure();
+
+#if CONFIG_ENABLED(MICROBIT_HEAP_ALLOCATOR)
+    // Bring up a nested heap allocator.
+    microbit_create_nested_heap(MICROBIT_NESTED_HEAP_SIZE);
+#endif
+
     // Bring up fiber scheduler.
     scheduler_init(messageBus);
 
@@ -125,35 +146,17 @@ void MicroBit::init()
     status |= MICROBIT_INITIALIZED;
 
 #if CONFIG_ENABLED(MICROBIT_BLE_PAIRING_MODE)
+    // Test if we need to enter BLE pairing mode...
     int i=0;
-    // Test if we need to enter BLE pairing mode
-    // If a RebootMode Key has been set boot straight into BLE mode
-    KeyValuePair* RebootMode = storage.get("RebootMode");
-    KeyValuePair* flashIncomplete = storage.get("flashIncomplete");
     sleep(100);
-    // Animation
-    uint8_t x = 0; uint8_t y = 0;
-    while ((buttonA.isPressed() && buttonB.isPressed() && i<25) || RebootMode != NULL || flashIncomplete != NULL)
+    while (buttonA.isPressed() && buttonB.isPressed() && i<10)
     {
-        display.image.setPixelValue(x,y,255);
-        sleep(50);
-        i++; x++;
+        sleep(100);
+        i++;
 
-        // Gradually fill screen
-        if(x == 5){
-          y++; x = 0;
-        }
-
-        if (i == 25 || RebootMode != NULL)
+        if (i == 10)
         {
-            // Remove KV if it exists
-            if(RebootMode != NULL){
-                storage.remove("RebootMode");
-            }
-            delete RebootMode;
-            delete flashIncomplete;
-
-#if CONFIG_ENABLED(MICROBIT_HEAP_REUSE_SD)
+#if CONFIG_ENABLED(MICROBIT_HEAP_ALLOCATOR) && CONFIG_ENABLED(MICROBIT_HEAP_REUSE_SD)
             microbit_create_heap(MICROBIT_SD_GATT_TABLE_START + MICROBIT_SD_GATT_TABLE_SIZE, MICROBIT_SD_LIMIT);
 #endif
             // Start the BLE stack, if it isn't already running.
@@ -170,7 +173,7 @@ void MicroBit::init()
 #endif
 
     // Attempt to bring up a second heap region, using unused memory normally reserved for Soft Device.
-#if CONFIG_ENABLED(MICROBIT_HEAP_REUSE_SD)
+#if CONFIG_ENABLED(MICROBIT_HEAP_ALLOCATOR) && CONFIG_ENABLED(MICROBIT_HEAP_REUSE_SD)
 #if CONFIG_ENABLED(MICROBIT_BLE_ENABLED)
     microbit_create_heap(MICROBIT_SD_GATT_TABLE_START + MICROBIT_SD_GATT_TABLE_SIZE, MICROBIT_SD_LIMIT);
 #else
@@ -215,7 +218,8 @@ void MicroBit::onListenerRegisteredEvent(MicroBitEvent evt)
         case MICROBIT_ID_COMPASS:
             // A listener has been registered for the compass.
             // The compass uses lazy instantiation, we just need to read the data once to start it running.
-            compass.getSample();
+            // Touch the compass through the heading() function to ensure it is calibrated. if it isn't this will launch any associated calibration algorithms.
+            compass.heading();
 
             break;
 
@@ -223,7 +227,7 @@ void MicroBit::onListenerRegisteredEvent(MicroBitEvent evt)
         case MICROBIT_ID_GESTURE:
             // A listener has been registered for the accelerometer.
             // The accelerometer uses lazy instantiation, we just need to read the data once to start it running.
-            accelerometer.getSample();
+            accelerometer.updateSample();
             break;
 
         case MICROBIT_ID_THERMOMETER:
