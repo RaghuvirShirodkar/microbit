@@ -4,6 +4,10 @@ The MIT License (MIT)
 Copyright (c) 2016 British Broadcasting Corporation.
 This software is provided by Lancaster University by arrangement with the BBC.
 
+Modifications Copyright (c) 2016 Calliope GbR
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern 
+und Björn Eberhardt GbR by arrangement with Calliope GbR. 
+
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
@@ -33,6 +37,7 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitDevice.h"
 #include "ErrorNo.h"
 #include "MicroBitSystemTimer.h"
+#include "Matrix4.h"
 #include "MicroBitCompat.h"
 #include "MicroBitComponent.h"
 #include "ManagedType.h"
@@ -47,8 +52,9 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitButton.h"
 #include "MicroBitPin.h"
 #include "MicroBitCompass.h"
+#include "MicroBitCompass-bmx.h"
 #include "MicroBitCompassCalibrator.h"
-#include "MicroBitAccelerometer.h"
+#include "MicroBitAccelerometer-bmx.h"
 #include "MicroBitThermometer.h"
 #include "MicroBitLightSensor.h"
 #include "MicroBitMultiButton.h"
@@ -65,6 +71,8 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitRadio.h"
 #include "MicroBitStorage.h"
 
+#include "CalliopeRGB.h"
+#include "CalliopeSoundMotor.h"
 // MicroBit::flags values
 #define MICROBIT_INITIALIZED                    0x01
 
@@ -111,8 +119,8 @@ class MicroBit
     MicroBitButton              buttonA;
     MicroBitButton              buttonB;
     MicroBitMultiButton         buttonAB;
-    MicroBitAccelerometer       &accelerometer;
-    MicroBitCompass             &compass;
+    MicroBitAccelerometer       accelerometer;
+    MicroBitCompass             compass;
     MicroBitCompassCalibrator   compassCalibrator;
     MicroBitThermometer         thermometer;
 
@@ -124,6 +132,10 @@ class MicroBit
     MicroBitRadio               radio;
     BLEDevice                   *ble;
 
+	//Calliope MINI specific devices
+	CalliopeRGB 				rgb;
+	CalliopeSoundMotor 			soundmotor;
+	
     /**
       * Constructor.
       *
