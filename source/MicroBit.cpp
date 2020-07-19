@@ -21,14 +21,8 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
-
-====================
-Modifications Copyright (c) 2016 Calliope GbR
-Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
-und Björn Eberhardt GbR by arrangement with Calliope GbR.
 */
 
-#include <pinmap.h>
 #include "MicroBitConfig.h"
 /*
  * The underlying Nordic libraries that support BLE do not compile cleanly with the stringent GCC settings we employ
@@ -84,17 +78,10 @@ MicroBit::MicroBit() :
        MICROBIT_ID_IO_P9,MICROBIT_ID_IO_P10,MICROBIT_ID_IO_P11,
        MICROBIT_ID_IO_P12,MICROBIT_ID_IO_P13,MICROBIT_ID_IO_P14,
        MICROBIT_ID_IO_P15,MICROBIT_ID_IO_P16,MICROBIT_ID_IO_P19,
-       MICROBIT_ID_IO_P20
-#ifdef TARGET_NRF51_CALLIOPE
-       ,
-       MICROBIT_ID_IO_P21
-#endif
-    ),
+       MICROBIT_ID_IO_P20),
     bleManager(storage),
     radio(),
-    ble(NULL),
-    rgb(),
-    soundmotor()
+    ble(NULL)
 {
     // Clear our status
     status = 0;

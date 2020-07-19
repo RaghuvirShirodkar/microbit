@@ -1,6 +1,5 @@
 {
   "build": {
-    "target": "calliope-mini-classic-gcc,*",
-    "targetSetExplicitly": true
+    "target": "bbc-microbit-classic-gcc,*"
   }
 }
