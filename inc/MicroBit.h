@@ -5,8 +5,8 @@ Copyright (c) 2016 British Broadcasting Corporation.
 This software is provided by Lancaster University by arrangement with the BBC.
 
 Modifications Copyright (c) 2016 Calliope GbR
-Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern 
-und Björn Eberhardt GbR by arrangement with Calliope GbR. 
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
+und Björn Eberhardt GbR by arrangement with Calliope GbR.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -37,7 +37,6 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitDevice.h"
 #include "ErrorNo.h"
 #include "MicroBitSystemTimer.h"
-#include "Matrix4.h"
 #include "MicroBitCompat.h"
 #include "MicroBitComponent.h"
 #include "ManagedType.h"
@@ -52,9 +51,8 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitButton.h"
 #include "MicroBitPin.h"
 #include "MicroBitCompass.h"
-#include "MicroBitCompass-bmx.h"
 #include "MicroBitCompassCalibrator.h"
-#include "MicroBitAccelerometer-bmx.h"
+#include "MicroBitAccelerometer.h"
 #include "MicroBitThermometer.h"
 #include "MicroBitLightSensor.h"
 #include "MicroBitMultiButton.h"
@@ -102,8 +100,10 @@ class MicroBit
     // Serial Interface
     MicroBitSerial              serial;
 
+#ifndef TARGET_NRF51_CALLIOPE
 	// Reset Button
 	InterruptIn     		    resetButton;
+#endif
 
     // Persistent key value store
     MicroBitStorage             storage;
@@ -119,8 +119,8 @@ class MicroBit
     MicroBitButton              buttonA;
     MicroBitButton              buttonB;
     MicroBitMultiButton         buttonAB;
-    MicroBitAccelerometer       accelerometer;
-    MicroBitCompass             compass;
+    MicroBitAccelerometer       &accelerometer;
+    MicroBitCompass             &compass;
     MicroBitCompassCalibrator   compassCalibrator;
     MicroBitThermometer         thermometer;
 
