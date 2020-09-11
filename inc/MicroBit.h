@@ -104,8 +104,10 @@ class MicroBit
     // Serial Interface
     MicroBitSerial              serial;
 
+#ifndef TARGET_NRF51_CALLIOPE
 	// Reset Button
 	InterruptIn     		    resetButton;
+#endif
 
     // Persistent key value store
     MicroBitStorage             storage;
