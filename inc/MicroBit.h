@@ -97,15 +97,15 @@ class MicroBit
 
     uint8_t                     status;
 
-
-
     public:
 
     // Serial Interface
     MicroBitSerial              serial;
 
+#ifndef TARGET_NRF51_CALLIOPE
 	// Reset Button
 	InterruptIn     		    resetButton;
+#endif
 
     // Persistent key value store
     MicroBitStorage             storage;
@@ -198,7 +198,7 @@ class MicroBit
       * Delay execution for the given amount of time.
       *
       * If the scheduler is running, this will deschedule the current fiber and perform
-      * a power efficent, concurrent sleep operation.
+      * a power efficient, concurrent sleep operation.
       *
       * If the scheduler is disabled or we're running in an interrupt context, this
       * will revert to a busy wait.
@@ -438,6 +438,7 @@ inline void MicroBit::reset()
         // Wait a little while for the connection to drop.
         wait_ms(100);
     }
+
     microbit_reset();
 }
 
@@ -445,7 +446,7 @@ inline void MicroBit::reset()
   * Delay execution for the given amount of time.
   *
   * If the scheduler is running, this will deschedule the current fiber and perform
-  * a power efficent, concurrent sleep operation.
+  * a power efficient, concurrent sleep operation.
   *
   * If the scheduler is disabled or we're running in an interrupt context, this
   * will revert to a busy wait.
@@ -477,7 +478,7 @@ inline void MicroBit::sleep(uint32_t milliseconds)
   * than the hardware random number generator built int the processor, which takes
   * a long time and uses a lot of energy.
   *
-  * KIDS: You shouldn't use this is the real world to generte cryptographic keys though...
+  * KIDS: You shouldn't use this is the real world to generate cryptographic keys though...
   * have a think why not. :-)
   *
   * @param max the upper range to generate a number for. This number cannot be negative.
