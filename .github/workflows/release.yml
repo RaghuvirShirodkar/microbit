@@ -8,7 +8,7 @@ on: [workflow_dispatch]
 #       - 'v*'
 
 jobs:
-  build:
+  build-for-non-bluetooth:
     runs-on: ubuntu-20.04
     steps:
       - name: Install dependencies
@@ -33,16 +33,42 @@ jobs:
           mkdir -p /tmp/release-prep
           cd build/calliope-mini-classic-gcc/
           cp source/microbit.a /tmp/release-prep/
-          cd ../../yotta_modules/
-          cp -r * /tmp/release-prep/
-          
+          cp ym/ble/source/ble.a ym/ble-nrf51822/source/ble-nrf51822.a ym/mbed-classic/existing/mbed-classic.a ym/microbit-dal/source/microbit-dal.a ym/nrf51-sdk/source/nrf51-sdk.a /tmp/release-prep
+          cd ../../yotta_targets/calliope-mini-classic-gcc/
+          cp bootloader/* ld/* softdevice/* /tmp/release-prep
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: microbit-release
+          path: /tmp/release-prep
+          retention-days: 1
+
+  build-for-bluetooth:
+    needs: build-for-non-bluetooth
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install python-setuptools  cmake build-essential ninja-build python-dev libffi-dev libssl-dev gcc-arm-none-eabi
+          curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py # Fetch get-pip.py for python 2.7 
+          python get-pip.py
+          pip install yotta
+
       - name: Checkout 'bluetooth-enabled' branch
         uses: actions/checkout@v3
         with:
           ref: bluetooth-enabled
-          
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: microbit-release
+          path: /tmp/release-prep
+
       - name: Build static libraries for Bluetooth devices
         run: |
+          ls -a && cp -r ../microbit /tmp/release-prep && ls -a /tmp/release-prep
           yotta clean
           yotta target calliope-mini-classic-gcc@https://github.com/calliope-mini/target-calliope-mini-classic-gcc
           yotta build
@@ -51,7 +77,11 @@ jobs:
         run: |
           cd build/calliope-mini-classic-gcc/
           cp source/microbit.a /tmp/release-prep/microbit-b.a
-          
+          cp ym/mbed-classic/existing/mbed-classic.a  /tmp/release-prep/mbed-classic-b.a
+          cp ym/microbit-dal/source/microbit-dal.a  /tmp/release-prep/microbit-dal-b.a
+          cd ../../yotta_modules/
+          cp -r * /tmp/release-prep/
+
       - name: Pack release
         id: pack_release
         run: |
