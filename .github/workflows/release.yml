@@ -9,7 +9,7 @@ on:
         default: 'vX.Y.Z'
 
 jobs:
-  build-for-version-${{ github.event.inputs.release_version }}:
+  build:
     runs-on: ubuntu-20.04
     steps:
       - name: Install dependencies
