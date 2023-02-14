@@ -31,7 +31,7 @@ jobs:
       - name: Build static libraries for non-Bluetooth devices
         run: |
           mkdir -p /tmp/release-prep
-          cp -r . /tmp/release
+          ls -a && cp -r ../microbit /tmp/release-prep
           yotta target calliope-mini-classic-gcc@https://github.com/calliope-mini/target-calliope-mini-classic-gcc
           yotta build
 
